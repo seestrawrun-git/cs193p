@@ -9,11 +9,15 @@ import SwiftUI
 
 struct ContentView: View {
     
-    let emojis: [String] = ["😅", "😩", "🫡", "👄", "☝️", "😅", "😩", "🫡", "👄", "☝️"]
+    
+    @State var emojis: [String] = ["😅", "😩", "🫡", "👄", "☝️", "😅", "😩", "🫡", "👄", "☝️"]
     @State var cardCount: Int = 4
     
     var body: some View {
+        
+
         VStack {
+            title
             ScrollView{
                 cards
             }
@@ -24,10 +28,27 @@ struct ContentView: View {
     }
     
     
+    var shuffler: some View {
+        
+        Button(action: {
+            emojis.shuffle()
+        }, label: {
+            Image(systemName: "person.3.fill")
+        })
+       
+        
+    }
+    
+    var title: some View {
+        Text("Memorize")
+            .font(.largeTitle)
+    }
     
     var cardCountAdjuster: some View {
         HStack {
             cardRemover
+            Spacer()
+            shuffler
             Spacer()
             cardAdder
         }
